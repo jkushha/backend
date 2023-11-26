@@ -19,7 +19,6 @@ export class User {
   @Column('varchar')
   lastName: string;
 
-  @Index()
   @Column('varchar', {unique: true })
   userName: string;
 
