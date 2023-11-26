@@ -3,10 +3,10 @@
 
 cmdname=$(basename $0)
 
-HOST=$DATABASE_HOST;
+HOST=$DATABASE_HOST_MASTER;
 
 
-PORT=$DATABASE_PORT;
+PORT=$DATABASE_PORT_MASTER;
 TOTAL_TRIES=60
 
 echoerr() { if [[ $QUIET -ne 1 ]]; then echo "$@" 1>&2; fi }
