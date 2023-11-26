@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -ev
+
+BIN_ROOT=$(dirname "$0")
+
+$BIN_ROOT/wait-for
+$BIN_ROOT/migrate
+$BIN_ROOT/backup

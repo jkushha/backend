@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+#   Use this script to test if a given TCP host/port are available
+
+cmdname=$(basename $0)
+
+HOST=$DATABASE_HOST;
+
+
+PORT=$DATABASE_PORT;
+TOTAL_TRIES=60
+
+echoerr() { if [[ $QUIET -ne 1 ]]; then echo "$@" 1>&2; fi }
+
+i=0
+while true; do
+    if [[ "$i" -gt $TOTAL_TRIES ]]; then
+        echoerr "$cmdname: timeout occurred after waiting $i seconds for $HOST:$PORT"
+        RESULT=1
+        break
+    fi
+    (echo > /dev/tcp/$HOST/$PORT) >/dev/null 2>&1
+    RESULT=$?
+    echo "WHATS MY RESULT? $RESULT"
+    if [[ $RESULT -eq 0 ]]; then
+        echoerr "$cmdname: $HOST:$PORT is available after $i seconds"
+        break
+    fi
+
+    ((i++))
+    sleep 1
+done
+
+exit $RESULT
